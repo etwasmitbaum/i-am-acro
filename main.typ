@@ -35,9 +35,10 @@
 #pagebreak()
 
 
-#init-acronyms(acronyms, "en")
+#init-acronyms(acronyms, "en", always-link: true)
 #print-acronyms()
 
+#ac("key1")
 #ac("key1")
 
 
