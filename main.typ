@@ -27,6 +27,12 @@
       long-pl: "lang-plural2",
     ),
   ),
+  key3: (
+    fr: (
+      // leave empty to test for errors
+    ),
+    en: (short: ""),
+  ),
 )
 #acronyms
 
@@ -68,6 +74,26 @@
   [Light Emitting Diodes(LEDs)-Case],
 
   [ac-suffix("LED", "Case",  plural: true)], [true], [#ac-suffix("LED", "Case", plural: true)], [LEDs-Case],
+  [], [], [], [],
+  [ac-custom("LED", "Custom LED",  "Custom Light Emitting Diode")],
+  [false #update-acronym-long-shown("LED", false)],
+  [#ac-custom("LED", "Custom LED", "Custom Light Emitting Diode")],
+  [Custom Light Emitting Diode (Custom LED)],
+
+  [ac-custom("LED", "Custom LED",  "Custom Light Emitting Diode")],
+  [true ],
+  [#ac-custom("LED", "Custom LED", "Custom Light Emitting Diode")],
+  [Custom LED],
+
+  [ac-custom("LED", "Custom LED",  "Custom Light Emitting Diode", suffix: "Case")],
+  [false #update-acronym-long-shown("LED", false)],
+  [#ac-custom("LED", "Custom LED", "Custom Light Emitting Diode", suffix: "Case")],
+  [Custom Light Emitting Diode(Custom LED)-Case],
+
+  [ac-custom("LED", "Custom LED",  "Custom Light Emitting Diode", suffix: "Case")],
+  [true],
+  [#ac-custom("LED", "Custom LED", "Custom Light Emitting Diode", suffix: "Case")],
+  [Custom LED-Case],
 )
 
 == Language: de
@@ -146,5 +172,3 @@
   [#ac-suffix("LED", "Gehäuse", plural: true, lang: "de")],
   [LEDs-Gehäuse],
 )
-
-//#acronyms
