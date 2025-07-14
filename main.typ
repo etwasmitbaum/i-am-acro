@@ -1,5 +1,10 @@
 #import "acronym.typ": *
 
+/////////////////////////////////////////////
+/// This document is used for manual testing
+/// of the package.
+///////////////////////////////////////////// 
+
 #let acronyms = (
   LED: (
     en: (
@@ -36,10 +41,16 @@
 )
 #acronyms
 
+#let language-mapping = (
+  en: [englisch],
+  de: [deutsch],
+  fr: "französisch",
+)
+
 #pagebreak()
 
 
-#init-acronyms(acronyms, "en", always-link: true)
+#init-acronyms(acronyms, "en", language-display: language-mapping, always-link: true)
 #print-acronyms()
 
 == Language: en
@@ -171,4 +182,14 @@
   [true],
   [#ac-suffix("LED", "Gehäuse", plural: true, lang: "de")],
   [LEDs-Gehäuse],
+
+  [ac("LED", second-lang: "de")],
+  [false #update-acronym-long-shown("LED", false)],
+  [#ac("LED", second-lang: "de")],
+  [Light Emitting Diode (LED, deutsch: Leuchtdiode)],
+
+  [ac("LED")\ second default-lang = "de"],
+  [false #update-acronym-long-shown("LED", false) #update-acro-second-lang("de")],
+  [#ac("LED")],
+  [Light Emitting Diode (LED, deutsch: Leuchtdiode)],
 )

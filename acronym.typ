@@ -1,22 +1,66 @@
 
 /// State variable conataining all acronyms.
-/// TODO: Describe stucture
+/// The keys `short` and `long` must be provided for each language. Their plural forms are optional. \
+/// Use the structure as shown in the example here:
+/// ```example
+/// #let my-acronyms = (
+///   key: (
+///     language1: (
+///       short: [short version],
+///       long: [long version],
+///       short-pl: "short plural",
+///       long-pl: [long plural]
+///     ),
+///     language2: (
+///       short: [second language short],
+///       long: [second language long],
+///       short-pl: [2nd lang short plural],
+///       long-pl: [2nd lang long plural]
+///     )
+///   ),
+///   LED: (
+///    en: (
+///      short: [LED],
+///      short-pl: [LEDs],
+///      long: [Light Emitting Diode],
+///    ),
+///    de: (
+///      short: "LED",
+///      long: "Leuchtdiode",
+///      long-pl: "Leuchtdioden",
+///    ),
+///  ),
+/// )
+/// #my-acronyms
+/// ```
 /// -> dictionary
 #let _acronyms = state("_acronyms", none)
+
+/// State variable containing languages and their written form being used in @ac when two languages are displayed.
+/// ```example
+/// #let language-mapping = (
+///   en: [english],
+///   de: [german],
+///   fr: "french",
+/// )
+/// #language-mapping
+/// ```
+#let _language-display = state("_language-display", (:))
+
+/// State variable, what the default second language is to be used on acronyms. Use "none" to disable this feature. This variable is context aware. Exmaple: "en", "de", "fr" -> string
+#let _default-second-lang = state("_default-second-lang", none)
 
 /// State variable, what the default language is to be used with acronyms. This is context aware. Exmaple: "en", "de", "fr" -> string
 #let _default-lang = state("_default-lang", none)
 
-/// State variable, if links and labels should be generated. Only the final value will be used. -> bool
+/// State variable, if links and labels should be generated. 
+/// If this is true @print-acronyms must be used. Alternatively you can create the labels yourself. See @printCustomAcronymTable. \
+/// Only the final value will be used. -> bool
 #let _always-link = state("_always-link", true)
 
 /// Prefix of label keys. Used to link acronyms to the printed acronym list. -> string
 #let LABEL_KEY = "acronymlinks-"
 
-// Maybe change typst language when printing different language
-
-
-// TODO create command to display custom form of acronym -> function with custom long and short form but store the usage correctly. So you can display a acronym for the first time (with custom ending for exmaple) and it is remembered as already shown
 
 /// Initialize the acronyms and the default settings.
 /// -> none
@@ -27,11 +71,16 @@
   acronyms,
   /// Set the default language. For exmaple "en", "de", "fr". You can change this later using @update-acro-lang -> string
   default-lang,
+  /// Set the default second language. For exmaple "en", "de", "fr". You can change this later using @update-acro-second-lang -> string
+  default-second-lang: none,
+  /// Languages and their written form being used in @ac when two languages are displayed. Use "none" if this is not requiered. -> dictionary
+  language-display: none,
   /// Controls if labels and links will be generated. The label will point to @print-acronyms, the link will be created on the displayed acronym.
   always-link: true,
 ) = {
   _default-lang.update(default-lang)
   _always-link.update(always-link)
+  _language-display.update(language-display)
 
   let data = (:)
   for (key, value) in acronyms {
@@ -48,6 +97,14 @@
   lang,
 ) = {
   _default-lang.update(lang)
+}
+
+/// Update the current default second language used for acronyms. -> none
+#let update-acro-second-lang(
+  /// Language to be displayed. Examples: "en", "de", "fr" -> string | none
+  lang,
+) = {
+  _default-second-lang.update(lang)
 }
 
 /// Display text with a link, when desired.
@@ -132,21 +189,39 @@
   key,
   /// Language to be displayed. none will use the default language -> string | none
   lang: none,
+  /// Second langauge to be displayed. If "auto" is passed, @_default-second-lang will be used. -> string | none
+  second-lang: auto,
 ) = {
   context {
     let selected-lang = if lang == none { _default-lang.get() } else { lang }
     verfiy-acronym-exists(key, selected-lang)
-
     let selected-acro = _acronyms.get().at(key)
     let text
+
+    // Auto is the default, so we extraxt the default language.
+    let selected-second-lang = if second-lang == auto {
+      _default-second-lang.get()
+    } else { second-lang }
 
     if selected-acro.long-shown {
       text = selected-acro.value.at(selected-lang).short
     } else {
       // Long was not shown before
-      text = [#selected-acro.value.at(selected-lang).long~(#selected-acro.value.at(selected-lang).short)]
+      if selected-second-lang != none {
+        // second language was provided and long form not shown before
+        // so we must display both languages.
+        verfiy-acronym-exists(key, selected-second-lang)
+
+        let second-lang-display = _language-display.final().at(selected-second-lang)
+
+        text = [#selected-acro.value.at(selected-lang).long (#selected-acro.value.at(selected-lang).short, #second-lang-display: #selected-acro.value.at(selected-second-lang).long)]
+      } else {
+        text = [#selected-acro.value.at(selected-lang).long (#selected-acro.value.at(selected-lang).short)]
+      }
+
       update-acronym-long-shown(key, true)
     }
+
 
     update-acronym-used(key, true)
     display-text(text, key: key, do-link: _always-link.final())
@@ -186,7 +261,7 @@
         // short-pl was not defined
         selected-acro.value.at(selected-lang).long + "s"
       }
-      text = [#long-pl-text~(#short-pl-text)]
+      text = [#long-pl-text (#short-pl-text)]
       update-acronym-long-shown(key, true)
     }
 
@@ -352,7 +427,7 @@
       if selected-acro.long-shown {
         text = short
       } else {
-        text = [#long~(#short)]
+        text = [#long (#short)]
         update-acronym-long-shown(key, true)
       }
     } else {
