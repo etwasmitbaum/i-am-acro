@@ -53,7 +53,7 @@
 /// State variable, what the default language is to be used with acronyms. This is context aware. Exmaple: "en", "de", "fr" -> string
 #let _default-lang = state("_default-lang", none)
 
-/// State variable, if links and labels should be generated. 
+/// State variable, if links and labels should be generated.
 /// If this is true @print-acronyms must be used. Alternatively you can create the labels yourself. See @printCustomAcronymTable. \
 /// Only the final value will be used. -> bool
 #let _always-link = state("_always-link", true)
@@ -66,7 +66,6 @@
 /// -> none
 #let init-acronyms(
   /// Dictionary containing all the defined acronyms.
-  /// TODO describe structure
   /// -> dictionary
   acronyms,
   /// Set the default language. For exmaple "en", "de", "fr". You can change this later using @update-acro-lang -> string
@@ -79,6 +78,7 @@
   always-link: true,
 ) = {
   _default-lang.update(default-lang)
+  _default-second-lang.update(default-second-lang)
   _always-link.update(always-link)
   _language-display.update(language-display)
 
@@ -112,7 +112,6 @@
 /// The label will all point to the acronyms in @print-acronyms.
 /// -> content
 #let display-text(
-  // TODO maybe rename function
   /// Text to be printed -> content | string
   text,
   /// Key used for label generation with @LABEL_KEY. Only required when "do-link" is true. -> string
@@ -202,6 +201,7 @@
     let selected-second-lang = if second-lang == auto {
       _default-second-lang.get()
     } else { second-lang }
+    let x = selected-second-lang
 
     if selected-acro.long-shown {
       text = selected-acro.value.at(selected-lang).short
@@ -445,7 +445,9 @@
   }
 }
 
-/// Print acronyms
+/// Print all used acronyms in a grid.
+/// This will create labels, if @_always-link is set to true.
+/// The list will be sorted by the acronym key. It is not possible to sort by content.
 /// -> content
 #let print-acronyms() = {
   context {
@@ -461,11 +463,15 @@
       }
     }
 
-    // TODO Sort the acronyms
+    // Sort by key, it is not possible to sort by content.
+    printable-acronyms = printable-acronyms.pairs().sorted(key: it => it.at(0))
 
     grid(
-      columns: (1fr, 1fr),
-      fill: (green, blue),
+      columns: (auto, 1fr),
+      row-gutter: 1em,
+      column-gutter: 2em,
+      //fill: (green, blue), // great for debugging
+      [*Acronym*], [*Definition*],
       ..{
         for (key, value) in printable-acronyms {
           (
