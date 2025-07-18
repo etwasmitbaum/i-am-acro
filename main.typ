@@ -1,4 +1,4 @@
-#import "acronym.typ": *
+#import "acronym.typ": * 
 
 /////////////////////////////////////////////
 /// This document is used for manual testing

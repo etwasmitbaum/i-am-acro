@@ -126,7 +126,9 @@
   }
 }
 
-/// Update the status of "used" for a acronym from @_acronyms. -> none
+/// Update the status of "used" for a acronym from @_acronyms.
+/// This may cause the error "label <acronymlinks-your_key> does not exist in the document" if you set used to false and do not call @ac to reset the state to true.
+///  -> none
 #let update-acronym-used(
   /// Key of the acronym, which will be updated. -> string
   key,
