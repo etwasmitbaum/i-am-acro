@@ -1,6 +1,6 @@
 #import "@preview/tidy:0.4.3"
 #import "@preview/codly:1.3.0": *
-#import "acronym.typ": *
+#import "i-am-acro.typ": *
 
 #set heading(numbering: "1.1")
 #show heading: it => {
@@ -15,6 +15,8 @@
 #show: codly-init.with()
 
 #let docs = tidy.parse-module(read("acronym.typ"), name: "i-am-acro")
+
+#align(center, text(size: 32pt)[i-am-acro])
 
 #outline(depth: 3)
 #pagebreak(weak: true)
