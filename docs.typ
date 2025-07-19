@@ -14,7 +14,7 @@
 }
 #show: codly-init.with()
 
-#let docs = tidy.parse-module(read("acronym.typ"), name: "i-am-acro")
+#let docs = tidy.parse-module(read("i-am-acro.typ"), name: "i-am-acro")
 
 #align(center, text(size: 32pt)[i-am-acro])
 
