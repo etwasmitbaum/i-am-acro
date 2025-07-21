@@ -1,6 +1,7 @@
+# i-am-acro
 Acronym package for typst, aiming for multilanguage support and feature richness.
 
-For a full guide how to use this package see the documentation: [docs.pdf](./docs.pdf)
+For a full guide how to use this package see the documentation: [docs.pdf](https://github.com/etwasmitbaum/i-am-acro/blob/main/docs.pdf)
 
 A quick overview of the features:
 - Declare acronyms in multiple langauages
@@ -36,7 +37,7 @@ A quick overview of the features:
 ```
 
 # Overview of all functions
-For detailed explanation see: [docs.pdf](./docs.pdf)
+For detailed explanation see: [docs.pdf](https://github.com/etwasmitbaum/i-am-acro/blob/main/docs.pdf)
 | **Function**                           | **Description**                                                                                                     |
 |----------------------------------------|---------------------------------------------------------------------------------------------------------------------|
 | **#init-acronyms(...)**                | Initialize acronyms and set default settings (like language) |
