@@ -1,6 +1,8 @@
 # i-am-acro
 Acronym package for typst, aiming for multilanguage support and feature richness.
 
+This package manages acronyms with multiple defined languages and supports advanced features like displaying an acronym with suffix or a custom form.
+
 For a full guide how to use this package see the documentation: [docs.pdf](https://github.com/etwasmitbaum/i-am-acro/blob/main/docs.pdf)
 
 A quick overview of the features:
