@@ -9,4 +9,4 @@ description = "Acronym package for typst, aiming for multilanguage support and f
 repository = "https://github.com/etwasmitbaum/i-am-acro"
 categories = ["utility", "model", "languages"]
 compiler = "0.13.0"
-exclude = ["docs.typ", "testing.typ"]
+exclude = ["docs.typ", "testing.typ", "docs.pdf"]
