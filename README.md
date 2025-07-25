@@ -14,7 +14,7 @@ A quick overview of the features:
 
 # Quick start
 ```typ
-#import "@preview/i-am-acro:0.1.0": * // import everything
+#import "@preview/i-am-acro:0.1.1": * // import everything
 #let acronyms = (
   LED: ( // key
     en: ( // language key
@@ -54,4 +54,4 @@ For detailed explanation see: [docs.pdf](https://github.com/etwasmitbaum/i-am-ac
 | **#update-acro-lang(...)**             | Change used default language. |
 | **#update-acro-second-lang(...)**      | Change used default second language. |
 | **#update-acronym-used(...)**          | Change the state, if an acronym was used before. |
-| **#update-acronym-long-shown(...)**    | Change the state, if an the long form of an acronym was shown before. |
+| **#update-acronym-long-shown(...)**    | Change the state, if the long form of an acronym was shown before. |

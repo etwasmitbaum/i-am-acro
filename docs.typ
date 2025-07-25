@@ -69,7 +69,7 @@
 == Quick start
 First import the package and define your acronyms in a dictionary like this:
 ```typ
-#import "@preview/i-am-acro:0.1.0": * // import everything
+#import "@preview/i-am-acro:0.1.1": * // import everything
 #let acronyms = (
   LED: (
     en: (
@@ -248,7 +248,7 @@ NOTE: It is not possible to sort by content.
 If you want to sort the arconyms by their short definition, they all need to be strings.
 
 ```typ
-#import "@preview/i-am-acro:0.1.0": * // import all or only needed
+#import "@preview/i-am-acro:0.1.1": * // import all or only needed
 
 #context {
   // Get the final states of all acronyms
