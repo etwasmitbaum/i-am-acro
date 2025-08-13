@@ -241,6 +241,7 @@
 ) = {
   context {
     let selected-lang = if lang == none { _default-lang.get() } else { lang }
+    verfiy-acronym-exists(key, selected-lang)
     let selected-acro = _acronyms.get().at(key)
 
     // First get the short-pl form, append "s" if none was defined.
@@ -283,6 +284,7 @@
 ) = {
   context {
     let selected-lang = if lang == none { _default-lang.get() } else { lang }
+    verfiy-acronym-exists(key, selected-lang)
     let selected-acro = _acronyms.get().at(key)
     let text = selected-acro.value.at(selected-lang).short
 
@@ -302,6 +304,7 @@
 ) = {
   context {
     let selected-lang = if lang == none { _default-lang.get() } else { lang }
+    verfiy-acronym-exists(key, selected-lang)
     let selected-acro = _acronyms.get().at(key)
     let text
 
@@ -327,6 +330,7 @@
 ) = {
   context {
     let selected-lang = if lang == none { _default-lang.get() } else { lang }
+    verfiy-acronym-exists(key, selected-lang)
     let selected-acro = _acronyms.get().at(key)
     let text = selected-acro.value.at(selected-lang).long
 
@@ -344,6 +348,7 @@
 ) = {
   context {
     let selected-lang = if lang == none { _default-lang.get() } else { lang }
+    verfiy-acronym-exists(key, selected-lang)
     let selected-acro = _acronyms.get().at(key)
     let text
 
@@ -371,6 +376,7 @@
 ) = {
   context {
     let selected-lang = if lang == none { _default-lang.get() } else { lang }
+    verfiy-acronym-exists(key, selected-lang)
     let selected-acro = _acronyms.get().at(key)
 
     let short-word
