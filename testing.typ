@@ -1,9 +1,9 @@
-#import "i-am-acro.typ": * 
+#import "i-am-acro.typ": *
 
 /////////////////////////////////////////////
 /// This document is used for manual testing
 /// of the package.
-///////////////////////////////////////////// 
+/////////////////////////////////////////////
 
 #let acronyms = (
   LED: (
@@ -37,6 +37,16 @@
       // leave empty to test for errors
     ),
     en: (short: ""),
+  ),
+  key4: (
+    en: (
+      short: "k4",
+      long: "key4",
+    ),
+    //de: (
+    //  short: "k4",
+    //  long: "kurz4",
+    //),
   ),
 )
 #acronyms
@@ -193,3 +203,5 @@
   [#ac("LED")],
   [Light Emitting Diode (LED, deutsch: Leuchtdiode)],
 )
+
+#ac("key4")

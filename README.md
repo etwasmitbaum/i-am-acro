@@ -14,7 +14,7 @@ A quick overview of the features:
 
 # Quick start
 ```typ
-#import "@preview/i-am-acro:0.1.2": * // import everything
+#import "@preview/i-am-acro:0.1.3": * // import everything
 #let acronyms = (
   LED: ( // key
     en: ( // language key

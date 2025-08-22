@@ -69,7 +69,7 @@
 == Quick start
 First import the package and define your acronyms in a dictionary like this:
 ```typ
-#import "@preview/i-am-acro:0.1.2": * // import everything
+#import "@preview/i-am-acro:0.1.3": * // import everything
 #let acronyms = (
   LED: (
     en: (
@@ -234,7 +234,8 @@ Let's see an example:
 #ac("LED")
 
 The acronym "LED" was displayed using `#ac("LED")`, since the default second langaue is given from before (see @code_fullExampleInitAcronym) the german version is also shown.
-The text `german:` was given by setting the `language-display` parameter accordinly (see @code_fullExampleLanguageDisplay).
+The text `german:` was given by setting the `language-display` parameter accordinly (see @code_fullExampleLanguageDisplay). \
+If the default second language is set, but the language was not defined in for the acronym key, the second language will be ignored.
 
 == Print custom acronym table <printCustomAcronymTable>
 You can simply import the internal variables `_acroyms`, `_always-link` and `LABEL_KEY` to the stored acroynms with their states.
@@ -248,7 +249,7 @@ NOTE: It is not possible to sort by content.
 If you want to sort the arconyms by their short definition, they all need to be strings.
 
 ```typ
-#import "@preview/i-am-acro:0.1.2": * // import all or only needed
+#import "@preview/i-am-acro:0.1.3": * // import all or only needed
 
 #context {
   // Get the final states of all acronyms

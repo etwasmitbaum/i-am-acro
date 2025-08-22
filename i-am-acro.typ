@@ -203,12 +203,21 @@
     let selected-second-lang = if second-lang == auto {
       _default-second-lang.get()
     } else { second-lang }
-    let x = selected-second-lang
 
     if selected-acro.long-shown {
       text = selected-acro.value.at(selected-lang).short
     } else {
       // Long was not shown before
+
+      // in case the default-second-lang is used, but it does not exist -> selected-second-lang will be none
+      // This will result in not using the second-lang.
+      // This is implemented so you do not have to define all acronym for the main and second language
+      if (
+        (selected-second-lang != none) and (second-lang == auto) and (selected-second-lang not in selected-acro.value)
+      ) {
+        selected-second-lang = none
+      }
+
       if selected-second-lang != none {
         // second language was provided and long form not shown before
         // so we must display both languages.
