@@ -161,9 +161,9 @@
 #table(
   columns: 4,
   table.header([command], [long shown], [output], [expected]),
-  [ac("LED")], [false], [#ac("LED")], [Leuchtdiode (LED)],
+  [ac("LED")], [false], [#ac("LED")], [Light Emitting Diode (LED)],
   [ac("LED", lang: "de")], [true], [#ac("LED", lang: "de")], [LED],
-  [acp("LED")], [false #update-acronym-long-shown("LED", false)], [#acp("LED")], [Leuchtdioden (LEDs)],
+  [acp("LED")], [false #update-acronym-long-shown("LED", false)], [#acp("LED")], [Light Emitting Diodes (LEDs)],
   [acp("LED", lang: "de")], [true], [#acp("LED", lang: "de")], [LEDs],
   [], [], [], [],
   [acs("LED")], [true], [#acs("LED")], [LED],
@@ -202,6 +202,22 @@
   [false #update-acronym-long-shown("LED", false) #update-acro-second-lang("de")],
   [#ac("LED")],
   [Light Emitting Diode (LED, deutsch: Leuchtdiode)],
+
+  [acp("LED")\ second default-lang = "de"],
+  [false #update-acronym-long-shown("LED", false) #update-acro-second-lang("de")],
+  [#acp("LED")],
+  [Light Emitting Diodes (LED, deutsch: Leuchtdioden)],
+
+  [acp("LED")\ second default-lang = "de"],
+  [true #update-acronym-long-shown("LED", true) #update-acro-second-lang("de")],
+  [#acp("LED")],
+  [LEDs],
+
+  [acp("key4")\ second default-lang = "de"],
+  [false #update-acronym-long-shown("key4", false) #update-acro-second-lang("de")],
+  [#acp("key4")],
+  [key4s (k4s)],
 )
 
+#update-acronym-long-shown("key4", false)
 #ac("key4")
